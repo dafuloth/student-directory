@@ -49,8 +49,23 @@ def input_students
   students
 end
 
+# Exercise 2: Program only prints students whose name begins a specified letter.
+def print_selected(students, begins_with)
+  puts "\nStudents whose name begins with #{begins_with.upcase}:"
+  # print(students) already exists so reuse the method
+  print(students.select { |student| student[:name][0].upcase == begins_with.upcase })
+  puts
+end
+
 # nothing happens until methods called
 # students = input_students
+
 print_header
-print(students)
+
+print(students) # Exercise 1
+
 print_footer(students)
+
+print_selected(students, "t") # Exercise 2
+
+
