@@ -55,11 +55,12 @@ end
 # e.g. "1. Dr. Hannibal Lecter"
 def print(students)
   students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{index + 1}.#{index < 9 ? "  " : " "}#{student[:name]} (#{student[:cohort]} cohort)"
 
     # Ex5 - Output the additional information:
-    puts "Biography: #{student[:bio]}"
-    puts "Nemesis: #{student[:nemesis]}"
+    # Ex6 - Align output with center(). Adding extra space above if needed
+    puts "Biography: #{student[:bio]}".center(20 + student[:bio].length)
+    puts "Nemesis: #{student[:nemesis]}".center(18 + student[:nemesis].length)
     puts
   end
 end
@@ -109,11 +110,11 @@ def while_print(students)
   counter = 0
 
   while counter < students.count  
-    puts "\n#{counter + 1}. #{students[counter][:name]} (#{students[counter][:cohort]} cohort)"
+    puts "\n#{counter + 1}.#{counter < 9 ? "  " : " "}#{students[counter][:name]} (#{students[counter][:cohort]} cohort)"
     
     # Ex5 - Output the additional information:
-    puts "Biography: #{students[counter][:bio]}"
-    puts "Nemesis: #{students[counter][:nemesis]}"
+    puts "Biography: #{students[counter][:bio]}".center(20 + students[counter][:bio].length)
+    puts "Nemesis: #{students[counter][:nemesis]}".center(18 + students[counter][:nemesis].length)
 
     counter += 1
   end  
@@ -123,13 +124,15 @@ end
 def print_with_info(students)
   puts "\nExercise 5: Added additional student info. Wrote code to output addtional info"
   students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{index + 1}.#{index < 9 ? "  " : " "}#{student[:name]} (#{student[:cohort]} cohort)"
     # Ex5 - Output the additional information:
-    puts "Biography: #{student[:bio]}"
-    puts "Nemesis: #{student[:nemesis]}"
+    puts "Biography: #{student[:bio]}".center(20 + student[:bio].length)
+    puts "Nemesis: #{student[:nemesis]}".center(18 + student[:nemesis].length)
     puts
   end
 end
+
+# Exercise 6: Aligned output with center()
 
 # nothing happens until methods called
 
@@ -149,3 +152,4 @@ print_shorter_names(students) # Exercise 3
 while_print(students) # Exercise 4
 
 print_with_info(students) # Exercise 5
+
