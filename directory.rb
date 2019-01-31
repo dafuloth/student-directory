@@ -77,17 +77,27 @@ def input_students
   # create an empty array
   students =[]
 
-  print "Enter the first name."
+  puts "Enter the first student name:"
+
   # get the first name
   name = gets.chomp
+  puts
+
   # while the name is not empty, repeat the code
   while !name.empty? do
+
+    confirmation = ""
 
     loop do
       puts "Storing data for student #{name}."
       puts "If incorrect, enter correct name now. Otherwise enter #{name} again to confirm."
 
       confirmation = gets.chomp
+
+      if confirmation.empty?
+        puts "Name cannot be blank. Terminating."
+        break
+      end
 
       puts
 
@@ -97,6 +107,8 @@ def input_students
         name = confirmation
       end
     end
+
+    break if confirmation.empty?
 
     puts "#{name} must be assigned to a cohort. Please enter cohort."
     cohort = gets.chomp.downcase.to_sym
@@ -121,14 +133,20 @@ def input_students
 
     end
 
+    puts "Who/what to keep this student away from - their nemesis:"
+    nemesis = gets.chomp
+
+    puts "Input biography for student:"
+    bio = gets.chomp
+
     puts "The student #{name} will be added to the #{cohort.to_s.capitalize} cohort."
 
 
     # add the student hash to the array
-    students << {name: name, cohort: cohort}
+    students << {name: name, cohort: cohort, bio: bio, nemesis: nemesis}
     puts "Now we have #{students.count} students"
 
-    print "Enter the next name: "
+    puts "Enter the next name: "
     # get another name from the user
     name = gets.chomp
   end
