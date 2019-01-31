@@ -1,16 +1,48 @@
 # put students into array
 students = [
-  {name: "Dr. Hannibal Lecter", cohort: :november},
-  {name: "Darth Vader", cohort: :november},
-  {name: "Nurse Ratched", cohort: :november},
-  {name: "Michael Corleone", cohort: :november},
-  {name: "Alex DeLarge", cohort: :november},
-  {name: "The Wicked Witch of the West", cohort: :november},
-  {name: "Terminator", cohort: :november},
-  {name: "Freddy Krueger", cohort: :november},
-  {name: "The Joker", cohort: :november},
-  {name: "Joffrey Baratheon", cohort: :november},
-  {name: "Norman Bates", cohort: :november}
+  {name: "Dr. Hannibal Lecter", cohort: :november,
+    bio: "A respected Baltimore socialite and renowned forensic psychiatrist. Also a cunning, highly-intelligent, cannibalistic and psychopathic serial-killer",
+    nemesis: "Clarice Starling" },
+
+  {name: "Darth Vader", cohort: :november,
+   bio: "a.k.a. Anakin Skywalker. Originally a Jedi prophesied to bring balance to the Force, Anakin Skywalker is lured to the dark side",
+   nemesis: "Obi-Wan Kenobi" },
+
+  {name: "Nurse Ratched", cohort: :november,
+   bio: "A cold, heartless, and passive-aggressive tyrant, Nurse Ratched became the stereotype of the nurse as a battleaxe",
+   nemesis: "none" },
+
+  {name: "Michael Corleone", cohort: :november, 
+   bio: "Don Michael Corleone was the head of the Corleone family after Vito Corleone stepped down",
+   nemesis: "Rival families" },
+
+  {name: "Alex DeLarge", cohort: :november,
+   bio: "A sociopath who robs, rapes, and assaults innocent people for his own amusement",
+   nemesis: "Ludovico Technique" },
+
+  {name: "The Wicked Witch of the West", cohort: :november,
+   bio: "Ruler of Winkie Country. Good with animals. Aquaphobic", 
+   nemesis: "Dorothy Gale" },
+
+  {name: "Terminator", cohort: :november,
+   bio: "From the future. The Terminator is a cybernetic organism. Living tissue over metal endoskeleton",
+   nemesis: "John Connor" },
+
+  {name: "Freddy Krueger", cohort: :november,
+   bio: "Serial killer who uses a gloved hand with razors to kill his victims in their dreams, causing their deaths in the real world as well", 
+   nemesis: "Fire" },
+
+  {name: "The Joker", cohort: :november,
+   bio: "A highly intelligent and manipulative criminal with a twisted and sadistic sense of humor",
+   nemesis: "Batman" },
+
+  {name: "Joffrey Baratheon", cohort: :november,
+   bio: "The second Baratheon king to sit on the Iron Throne. Sparked the War of the Five Kings",
+   nemesis: "Olenna Tyrell" },
+
+  {name: "Norman Bates", cohort: :november,
+   bio: "Runs the Bates Motel in Fairvale, with his mother",
+   nemesis: "Mother" }
 ]
 
 def print_header
@@ -19,9 +51,16 @@ def print_header
   puts "-------------"
 end
 
+# Exercise 1: Modify print(students) to print numbered list of students,
+# e.g. "1. Dr. Hannibal Lecter"
 def print(students)
   students.each_with_index do |student, index|
     puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+
+    # Ex5 - Output the additional information:
+    puts "Biography: #{student[:bio]}"
+    puts "Nemesis: #{student[:nemesis]}"
+    puts
   end
 end
 
@@ -65,17 +104,36 @@ end
 
 # Exercise 4: Rewrite the each() method to print all students using while or until 
 def while_print(students)
-  puts "Exercise 4: Same as print(students) but using a while loop:"
+  puts "\nExercise 4: Same as print(students) but using a while loop:"
 
   counter = 0
 
   while counter < students.count  
-    puts "#{counter + 1}. #{students[counter][:name]} (#{students[counter][:cohort]} cohort)"
+    puts "\n#{counter + 1}. #{students[counter][:name]} (#{students[counter][:cohort]} cohort)"
+    
+    # Ex5 - Output the additional information:
+    puts "Biography: #{students[counter][:bio]}"
+    puts "Nemesis: #{students[counter][:nemesis]}"
+
     counter += 1
   end  
 end
 
+# Exercise 5: Adding information: short biography, nemesis (credit to wikipedia and https://villains.fandom.com)
+def print_with_info(students)
+  puts "\nExercise 5: Added additional student info. Wrote code to output addtional info"
+  students.each_with_index do |student, index|
+    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    # Ex5 - Output the additional information:
+    puts "Biography: #{student[:bio]}"
+    puts "Nemesis: #{student[:nemesis]}"
+    puts
+  end
+end
+
 # nothing happens until methods called
+
+# uncomment the next line to take data from user input
 # students = input_students
 
 print_header
@@ -89,3 +147,5 @@ print_selected(students, "t") # Exercise 2
 print_shorter_names(students) # Exercise 3
 
 while_print(students) # Exercise 4
+
+print_with_info(students) # Exercise 5
