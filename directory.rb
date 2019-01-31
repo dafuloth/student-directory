@@ -51,10 +51,28 @@ end
 
 # Exercise 2: Program only prints students whose name begins a specified letter.
 def print_selected(students, begins_with)
-  puts "\nStudents whose name begins with #{begins_with.upcase}:"
+  puts "\nExercise 2: Students whose name begins with #{begins_with.upcase}:"
   # print(students) already exists so reuse the method
   print(students.select { |student| student[:name][0].upcase == begins_with.upcase })
-  puts
+end
+
+# Exercise 3: Only print the students whose name is shorter than 12 characters.
+def print_shorter_names(students)
+  puts "\nExercise 3: Students whose names are shorter than 12 characters:"
+  # print(students) already exists so reuse the method
+  print(students.select { |student| student[:name].length < 12 })
+end
+
+# Exercise 4: Rewrite the each() method to print all students using while or until 
+def while_print(students)
+  puts "Exercise 4: Same as print(students) but using a while loop:"
+
+  counter = 0
+
+  while counter < students.count  
+    puts "#{counter + 1}. #{students[counter][:name]} (#{students[counter][:cohort]} cohort)"
+    counter += 1
+  end  
 end
 
 # nothing happens until methods called
@@ -68,4 +86,6 @@ print_footer(students)
 
 print_selected(students, "t") # Exercise 2
 
+print_shorter_names(students) # Exercise 3
 
+while_print(students) # Exercise 4
