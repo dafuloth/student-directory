@@ -70,18 +70,65 @@ def print_footer(names)
   puts "Overall, we have #{names.count} great students."
 end
 
+# Ex7. Modify input_students to accept user input of cohort. Added error checking
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   # create an empty array
   students =[]
+
+  print "Enter the first name."
   # get the first name
   name = gets.chomp
   # while the name is not empty, repeat the code
   while !name.empty? do
+
+    loop do
+      puts "Storing data for student #{name}."
+      puts "If incorrect, enter correct name now. Otherwise enter #{name} again to confirm."
+
+      confirmation = gets.chomp
+
+      puts
+
+      if name == confirmation
+        break
+      else
+        name = confirmation
+      end
+    end
+
+    puts "#{name} must be assigned to a cohort. Please enter cohort."
+    cohort = gets.chomp.downcase.to_sym
+
+    loop do
+      if cohort.to_s == ""
+        puts "Blank input. Defaulting to current month: #{Time.now.strftime("%B")}."
+        cohort = Time.now.strftime("%B").to_sym
+      end
+
+    puts "#{name} will be assigned cohort #{cohort}. Enter #{cohort} again to confirm:"
+  
+    confirmation = gets.chomp
+
+    puts
+
+      if confirmation.upcase == cohort.to_s.upcase
+        break
+      else
+        cohort = confirmation.to_sym
+      end
+
+    end
+
+    puts "The student #{name} will be added to the #{cohort.to_s.capitalize} cohort."
+
+
     # add the student hash to the array
-    students << {name: name, cohort: :november}
+    students << {name: name, cohort: cohort}
     puts "Now we have #{students.count} students"
+
+    print "Enter the next name: "
     # get another name from the user
     name = gets.chomp
   end
