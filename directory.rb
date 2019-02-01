@@ -10,8 +10,8 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
+  puts "3. Save the list to file. Enter filename or blank to use default (students.csv)"
+  puts "4. Load the list to file. Enter filename or blank to use default (students.csv)"
   puts "9. Exit" # 9 because we'll be adding more items    
 end
 
@@ -22,14 +22,19 @@ def process(selection)
   when "2"
     show_students
   when "3"
-    save_students
+    save_students(get_filename)
   when "4"
-    load_students
+    load_students(get_filename)
   when "9"
     exit # this will cause the program to terminate
   else
     puts "I don't know what you meant, try again"
   end
+end
+
+def get_filename()
+  filename = STDIN.gets.chomp
+  (filename == "") ? filename = "students.csv" : filename
 end
 
 def show_students
@@ -205,9 +210,9 @@ def chompless()
   puts by_range
 end
 
-def save_students
+def save_students(filename = "students.csv")
   # open the file for writing
-  file = File.open("students.csv", "w")
+  file = File.open(filename, "w")
   # iterate over the array of students
   @students.each do |student|
     student_data = [student[:name], student[:cohort], student[:bio], student[:nemesis]]
@@ -215,6 +220,7 @@ def save_students
     file.puts csv_line
   end
   file.close
+  puts "Wrote data of #{@students.count} students to #{filename}."
 end
 
 def load_students(filename = "students.csv")
