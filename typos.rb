@@ -2,7 +2,7 @@ def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   # create an empty array
-  students = {}
+  students = []
   # get the first name
   name = gets .chomp
   # while the name is not empty, repeat this code
