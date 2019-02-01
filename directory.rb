@@ -208,27 +208,6 @@ def chompless()
   puts by_range
 end
 
-# nothing happens until methods called
-
-# uncomment the next line to take data from user input
-# students = input_students
-
-# print_header
-
-# print(students) # Exercise 1
-
-# print_footer(students)
-
-# print_selected(students, "t") # Exercise 2
-
-# print_shorter_names(students) # Exercise 3
-
-# while_print(students) # Exercise 4
-
-# print_with_info(students) # Exercise 5
-
-#chompless # Exercise 10
-
 
 ## Program entry point ##
 interactive_menu
