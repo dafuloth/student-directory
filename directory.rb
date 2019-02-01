@@ -134,7 +134,7 @@ def input_students
 
 
     # add the student hash to the array
-    @students << {name: name, cohort: cohort, bio: bio, nemesis: nemesis}
+    add_student(name, cohort.to_sym, bio, nemesis)
     puts "Now we have #{@students.count} students"
 
     puts "Enter the next name: "
@@ -221,9 +221,15 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort, bio, nemesis = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym, bio: bio, nemesis: nemesis}
+  
+  add_student(name, cohort.to_sym, bio, nemesis)
+    
   end
   file.close
+end
+
+def add_student(name, cohort, bio, nemesis)
+  @students << {name: name, cohort: cohort.to_sym, bio: bio, nemesis: nemesis}
 end
 
 def try_load_students
@@ -231,7 +237,7 @@ def try_load_students
   return if filename.nil? # get out of the method if it isn't given
   if File.exists?(filename) # if it exists
     load_students(filename)
-     puts "Loaded #{@students.count} from #{filename}"
+    puts "Loaded #{@students.count} from #{filename}"
   else # if it doesn't exist
     puts "Sorry, #{filename} doesn't exist."
     exit # quit the program
