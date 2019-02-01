@@ -218,14 +218,18 @@ def save_students
 end
 
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-  name, cohort, bio, nemesis = line.chomp.split(',')
-  
-  add_student(name, cohort.to_sym, bio, nemesis)
-    
+
+  if File.exists?(filename)
+    file = File.open(filename, "r")
+    file.readlines.each do |line|
+      name, cohort, bio, nemesis = line.chomp.split(',')  
+      add_student(name, cohort.to_sym, bio, nemesis)    
+    end
+    file.close
+    puts "Loaded #{@students.count} from #{filename}"
+  else
+    puts "#{filename} not found. No data loaded."
   end
-  file.close
 end
 
 def add_student(name, cohort, bio, nemesis)
@@ -234,14 +238,24 @@ end
 
 def try_load_students
   filename = ARGV.first # first argument from the command line
-  return if filename.nil? # get out of the method if it isn't given
-  if File.exists?(filename) # if it exists
-    load_students(filename)
-    puts "Loaded #{@students.count} from #{filename}"
-  else # if it doesn't exist
+
+  if filename.nil?
+    # if no argument given, see if we can use students.csv
+    if File.exists?("students.csv")
+      filename = "students.csv"
+      puts "File not specified, or not found. Using existing students.csv instead."
+	else
+	  return
+    end
+  elsif !File.exists?(filename) 
+    # filename given but not valid
     puts "Sorry, #{filename} doesn't exist."
     exit # quit the program
   end
+  
+  # if this code still running, filename is valid. Load it.
+  load_students(filename)
+  
 end
 
 try_load_students
