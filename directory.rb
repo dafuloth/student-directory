@@ -10,6 +10,7 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
+  puts "3. Save the list to students.csv"
   puts "9. Exit" # 9 because we'll be adding more items    
 end
 
@@ -19,6 +20,8 @@ def process(selection)
     input_students
   when "2"
     show_students
+  when "3"
+    save_students
   when "9"
     exit # this will cause the program to terminate
   else
@@ -118,11 +121,11 @@ def input_students
 
     cohort = confirm_cohort(cohort)
 
-    puts "Who/what to keep this student away from - their nemesis:"
-    nemesis = gets.chomp
-
     puts "Input biography for student:"
     bio = gets.chomp
+
+    puts "Who/what to keep this student away from - their nemesis:"
+    nemesis = gets.chomp
 
     puts "The student #{name} will be added to the #{cohort.to_s.capitalize} cohort."
 
@@ -199,6 +202,17 @@ def chompless()
   puts by_range
 end
 
+def save_students
+  # open the file for writing
+  file = File.open("students.csv", "w")
+  # iterate over the array of students
+  @students.each do |student|
+    student_data = [student[:name], student[:cohort], student[:bio], student[:nemesis]]
+    csv_line = student_data.join(",")
+    file.puts csv_line
+  end
+  file.close
+end
 
 ## Program entry point ##
 interactive_menu
