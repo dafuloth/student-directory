@@ -6,12 +6,12 @@ def input_students
   # get the first name
   name = gets.chomp
   # while the name is not empty, repeat this code
-  when name.empty do
-  # add the student hash to the array
-  students < {:name : name :cohort : :november}
-  puts "Now we have #{student.count} students"
-  # get another name from the user
-  name = get.chomp
+  while name.empty? do
+    # add the student hash to the array
+    students < {:name : name :cohort : :november}
+    puts "Now we have #{student.count} students"
+    # get another name from the user
+    name = get.chomp
   end
   # return the array of students
   students
