@@ -200,6 +200,21 @@ end
 
 # Exercise 6: Aligned output with center()
 
+# Ex10: Alternatives to chomp
+def chompless()
+  puts "1. Using rstrip"
+  by_rstrip = gets.rstrip
+  puts by_rstrip
+
+  puts "2. Using chop"
+  by_chop = gets.chop
+  puts by_chop
+
+  puts "3: By specifying range"
+  by_range = gets[0...-1]
+  puts by_range
+end
+
 # nothing happens until methods called
 
 # uncomment the next line to take data from user input
@@ -218,4 +233,6 @@ print_shorter_names(students) # Exercise 3
 while_print(students) # Exercise 4
 
 print_with_info(students) # Exercise 5
+
+chompless # Exercise 10
 
