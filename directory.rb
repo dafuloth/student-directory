@@ -92,10 +92,10 @@ def print(students)
   end
 end
 
-# Ex9. Message now appropriate for 1 student or more students 
+# Ex9. Message now appropriate for 1 student  
 def print_footer(names)
   # print number of students
-  puts "Overall, we have #{names.count} great student#{names.count > 1 ? "s" : ""}."
+  puts "Overall, we have #{names.count} great student#{names.count == 1 ? "" : "s"}."
 end
 
 # Ex7. Modify input_students to accept user input of cohort. Added error checking
@@ -249,19 +249,23 @@ end
 # uncomment the next line to take data from user input
 # students = input_students
 
-print_header
+# print_header
 
-print(students) # Exercise 1
+# print(students) # Exercise 1
 
-print_footer(students)
+# print_footer(students)
 
-print_selected(students, "t") # Exercise 2
+# print_selected(students, "t") # Exercise 2
 
-print_shorter_names(students) # Exercise 3
+# print_shorter_names(students) # Exercise 3
 
-while_print(students) # Exercise 4
+# while_print(students) # Exercise 4
 
-print_with_info(students) # Exercise 5
+# print_with_info(students) # Exercise 5
 
-chompless # Exercise 10
+#chompless # Exercise 10
+
+
+## Program entry point ##
+interactive_menu
 
