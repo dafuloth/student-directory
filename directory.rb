@@ -3,7 +3,7 @@
 def interactive_menu
   loop do
     print_menu    	
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
@@ -71,7 +71,7 @@ def confirm_name(name)
   loop do
     puts "Storing data for student #{name}."
     puts "If incorrect, enter correct name now. Otherwise enter #{name} again to confirm."
-    confirmation = gets.chomp
+    confirmation = STDIN.gets.chomp
 
     if confirmation.empty?
       puts "Name cannot be blank. Terminating."
@@ -93,9 +93,9 @@ def confirm_cohort(cohort)
 
     puts "Student will be assigned #{cohort} cohort. Enter #{cohort} again to confirm:"
 
-	confirmation = gets.chomp
+    confirmation = STDIN.gets.chomp
 
-	puts
+    puts
 
     (confirmation.upcase == cohort.to_s.upcase) ? (return cohort) : cohort = confirmation.to_sym
   end
@@ -109,26 +109,26 @@ def input_students
   puts "Enter the first student name:"
 
   # get the first name
-  name = gets.chomp
+  name = STDIN.gets.chomp
   puts
 
   # while the name is not empty, repeat the code
   while !name.empty? do
 
-	name = confirm_name(name)
+    name = confirm_name(name)
 	
-	break if name.empty?
+    break if name.empty?
 
     puts "#{name} must be assigned to a cohort. Please enter cohort."
-    cohort = gets.chomp.downcase.to_sym
+    cohort = STDIN.gets.chomp.downcase.to_sym
 
     cohort = confirm_cohort(cohort)
 
     puts "Input biography for student:"
-    bio = gets.chomp
+    bio = STDIN.gets.chomp
 
     puts "Who/what to keep this student away from - their nemesis:"
-    nemesis = gets.chomp
+    nemesis = STDIN.gets.chomp
 
     puts "The student #{name} will be added to the #{cohort.to_s.capitalize} cohort."
 
@@ -139,7 +139,7 @@ def input_students
 
     puts "Enter the next name: "
     # get another name from the user
-    name = gets.chomp
+    name = STDIN.gets.chomp
   end
 end
 
@@ -193,15 +193,15 @@ end
 # Ex10: Alternatives to chomp
 def chompless()
   puts "1. Using rstrip"
-  by_rstrip = gets.rstrip
+  by_rstrip = STDIN.gets.rstrip
   puts by_rstrip
 
   puts "2. Using chop"
-  by_chop = gets.chop
+  by_chop = STDIN.gets.chop
   puts by_chop
 
   puts "3: By specifying range"
-  by_range = gets[0...-1]
+  by_range = STDIN.gets[0...-1]
   puts by_range
 end
 
@@ -217,8 +217,8 @@ def save_students
   file.close
 end
 
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort, bio, nemesis = line.chomp.split(',')
     @students << {name: name, cohort: cohort.to_sym, bio: bio, nemesis: nemesis}
@@ -226,7 +226,17 @@ def load_students
   file.close
 end
 
+def try_load_students
+  filename = ARGV.first # first argument from the command line
+  return if filename.nil? # get out of the method if it isn't given
+  if File.exists?(filename) # if it exists
+    load_students(filename)
+     puts "Loaded #{@students.count} from #{filename}"
+  else # if it doesn't exist
+    puts "Sorry, #{filename} doesn't exist."
+    exit # quit the program
+  end
+end
 
-## Program entry point ##
+try_load_students
 interactive_menu
-
