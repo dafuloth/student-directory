@@ -54,14 +54,16 @@ end
 # Exercise 1: Modify print(students) to print numbered list of students,
 # e.g. "1. Dr. Hannibal Lecter"
 def print(students)
-  students.each_with_index do |student, index|
-    puts "#{index + 1}.#{index < 9 ? "  " : " "}#{student[:name]} (#{student[:cohort]} cohort)"
+  if !students.empty?
+    students.each_with_index do |student, index|
+      puts "#{index + 1}.#{index < 9 ? "  " : " "}#{student[:name]} (#{student[:cohort]} cohort)"
 
-    # Ex5 - Output the additional information:
-    # Ex6 - Align output with center(). Adding extra space above if needed
-    puts "Biography: #{student[:bio]}".center(20 + student[:bio].length)
-    puts "Nemesis: #{student[:nemesis]}".center(18 + student[:nemesis].length)
-    puts
+      # Ex5 - Output the additional information:
+      # Ex6 - Align output with center(). Adding extra space above if needed
+      puts "Biography: #{student[:bio]}".center(20 + student[:bio].length)
+      puts "Nemesis: #{student[:nemesis]}".center(18 + student[:nemesis].length)
+      puts
+    end
   end
 end
 
@@ -189,12 +191,14 @@ end
 # Exercise 5: Adding information: short biography, nemesis (credit to wikipedia and https://villains.fandom.com)
 def print_with_info(students)
   puts "\nExercise 5: Added additional student info. Wrote code to output addtional info"
-  students.each_with_index do |student, index|
-    puts "#{index + 1}.#{index < 9 ? "  " : " "}#{student[:name]} (#{student[:cohort]} cohort)"
-    # Ex5 - Output the additional information:
-    puts "Biography: #{student[:bio]}".center(20 + student[:bio].length)
-    puts "Nemesis: #{student[:nemesis]}".center(18 + student[:nemesis].length)
-    puts
+  if !students.empty?
+    students.each_with_index do |student, index|
+      puts "#{index + 1}.#{index < 9 ? "  " : " "}#{student[:name]} (#{student[:cohort]} cohort)"
+      # Ex5 - Output the additional information:
+      puts "Biography: #{student[:bio]}".center(20 + student[:bio].length)
+      puts "Nemesis: #{student[:nemesis]}".center(18 + student[:nemesis].length)
+      puts
+    end
   end
 end
 
