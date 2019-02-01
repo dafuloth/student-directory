@@ -65,9 +65,10 @@ def print(students)
   end
 end
 
+# Ex9. Message now appropriate for 1 student or more students 
 def print_footer(names)
   # print number of students
-  puts "Overall, we have #{names.count} great students."
+  puts "Overall, we have #{names.count} great student#{names.count > 1 ? "s" : ""}."
 end
 
 # Ex7. Modify input_students to accept user input of cohort. Added error checking
