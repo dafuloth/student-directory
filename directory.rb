@@ -33,52 +33,6 @@ def show_students
   print_footer(students)
 end
 
-# put students into array
-students = [
-  {name: "Dr. Hannibal Lecter", cohort: :november,
-    bio: "A respected Baltimore socialite and renowned forensic psychiatrist. Also a cunning, highly-intelligent, cannibalistic and psychopathic serial-killer",
-    nemesis: "Clarice Starling" },
-
-  {name: "Darth Vader", cohort: :november,
-   bio: "a.k.a. Anakin Skywalker. Originally a Jedi prophesied to bring balance to the Force, Anakin Skywalker is lured to the dark side",
-   nemesis: "Obi-Wan Kenobi" },
-
-  {name: "Nurse Ratched", cohort: :november,
-   bio: "A cold, heartless, and passive-aggressive tyrant, Nurse Ratched became the stereotype of the nurse as a battleaxe",
-   nemesis: "none" },
-
-  {name: "Michael Corleone", cohort: :november, 
-   bio: "Don Michael Corleone was the head of the Corleone family after Vito Corleone stepped down",
-   nemesis: "Rival families" },
-
-  {name: "Alex DeLarge", cohort: :november,
-   bio: "A sociopath who robs, rapes, and assaults innocent people for his own amusement",
-   nemesis: "Ludovico Technique" },
-
-  {name: "The Wicked Witch of the West", cohort: :november,
-   bio: "Ruler of Winkie Country. Good with animals. Aquaphobic", 
-   nemesis: "Dorothy Gale" },
-
-  {name: "Terminator", cohort: :november,
-   bio: "From the future. The Terminator is a cybernetic organism. Living tissue over metal endoskeleton",
-   nemesis: "John Connor" },
-
-  {name: "Freddy Krueger", cohort: :november,
-   bio: "Serial killer who uses a gloved hand with razors to kill his victims in their dreams, causing their deaths in the real world as well", 
-   nemesis: "Fire" },
-
-  {name: "The Joker", cohort: :november,
-   bio: "A highly intelligent and manipulative criminal with a twisted and sadistic sense of humor",
-   nemesis: "Batman" },
-
-  {name: "Joffrey Baratheon", cohort: :november,
-   bio: "The second Baratheon king to sit on the Iron Throne. Sparked the War of the Five Kings",
-   nemesis: "Olenna Tyrell" },
-
-  {name: "Norman Bates", cohort: :november,
-   bio: "Runs the Bates Motel in Fairvale, with his mother",
-   nemesis: "Mother" }
-]
 
 def print_header
   # print list of students
