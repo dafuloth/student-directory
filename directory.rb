@@ -1,3 +1,5 @@
+require 'csv'
+
 @students = []
 
 def interactive_menu
@@ -215,6 +217,7 @@ def chompless()
 end
 
 def save_students(filename = "students.csv")
+# Version 1: with file.close
   # open the file for writing
 #  file = File.open(filename, "w")
   # iterate over the array of students
@@ -225,11 +228,19 @@ def save_students(filename = "students.csv")
 #  end
 #  file.close
 
-  File.open(filename, "w") do |file|
+# Version 2: file.open with do..end
+#  File.open(filename, "w") do |file|
+#    @students.each do |student|
+#      student_data = [student[:name], student[:cohort], student[:bio], student[:nemesis]]
+#      csv_line = student_data.join(",")
+#      file.puts csv_line
+#    end
+#  end
+#
+
+  CSV.open(filename, 'wb') do |csv|
     @students.each do |student|
-      student_data = [student[:name], student[:cohort], student[:bio], student[:nemesis]]
-      csv_line = student_data.join(",")
-      file.puts csv_line
+      csv << [student[:name], student[:cohort], student[:bio], student[:nemesis]]
     end
   end
 
@@ -254,6 +265,7 @@ def load_students(filename = "students.csv")
   end
 
   if File.exists?(filename)
+# Version 1
 #    file = File.open(filename, "r")
 #    file.readlines.each do |line|
 #      name, cohort, bio, nemesis = line.chomp.split(',')  
@@ -261,11 +273,17 @@ def load_students(filename = "students.csv")
 #    end
 #    file.close
 
-    File.open(filename, "r") do |file|
-      file.readlines.each do |line|
-        name, cohort, bio, nemesis = line.chomp.split(',')
-        add_student(name, cohort.to_sym, bio, nemesis)
-      end
+# Version 2
+#    File.open(filename, "r") do |file|
+#      file.readlines.each do |line|
+#        name, cohort, bio, nemesis = line.chomp.split(',')
+#        add_student(name, cohort.to_sym, bio, nemesis)
+#      end
+#    end
+
+    CSV.foreach(filename) do |row|
+      name, cohort, bio, nemesis = row
+      add_student(name, cohort.to_sym, bio, nemesis)
     end
 
     puts "Loaded #{@students.count} from #{filename}"
