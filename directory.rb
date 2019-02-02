@@ -10,8 +10,8 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to file. Enter filename or blank to use default (students.csv)"
-  puts "4. Load the list to file. Enter filename or blank to use default (students.csv)"
+  puts "3. Save list to file."
+  puts "4. Load list from file."
   puts "9. Exit" # 9 because we'll be adding more items    
 end
 
@@ -22,8 +22,10 @@ def process(selection)
   when "2"
     show_students
   when "3"
+    puts "Saving to file."
     save_students(get_filename)
   when "4"
+    puts "Loading from file."
     load_students(get_filename)
   when "9"
     exit # this will cause the program to terminate
@@ -33,6 +35,7 @@ def process(selection)
 end
 
 def get_filename()
+  puts "Enter filename or just press return to use default (students.csv)."
   filename = STDIN.gets.chomp
   (filename == "") ? filename = "students.csv" : filename
 end
@@ -212,29 +215,46 @@ end
 
 def save_students(filename = "students.csv")
   # open the file for writing
-  file = File.open(filename, "w")
+#  file = File.open(filename, "w")
   # iterate over the array of students
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort], student[:bio], student[:nemesis]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+#  @students.each do |student|
+#    student_data = [student[:name], student[:cohort], student[:bio], student[:nemesis]]
+#    csv_line = student_data.join(",")
+#    file.puts csv_line
+#  end
+#  file.close
+
+  File.open(filename, "w") do |file|
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort], student[:bio], student[:nemesis]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+    end
   end
-  file.close
+
   puts "Wrote data of #{@students.count} students to #{filename}."
 end
 
 def load_students(filename = "students.csv")
 
   if File.exists?(filename)
-    file = File.open(filename, "r")
-    file.readlines.each do |line|
-      name, cohort, bio, nemesis = line.chomp.split(',')  
-      add_student(name, cohort.to_sym, bio, nemesis)    
+#    file = File.open(filename, "r")
+#    file.readlines.each do |line|
+#      name, cohort, bio, nemesis = line.chomp.split(',')  
+#      add_student(name, cohort.to_sym, bio, nemesis)    
+#    end
+#    file.close
+
+    File.open(filename, "r") do |file|
+      file.readlines.each do |line|
+        name, cohort, bio, nemesis = line.chomp.split(',')
+        add_student(name, cohort.to_sym, bio, nemesis)
+      end
     end
-    file.close
+
     puts "Loaded #{@students.count} from #{filename}"
   else
-    puts "#{filename} not found. No data loaded."
+    puts "The file #{filename} was not found. No data loaded."
   end
 end
 
@@ -250,8 +270,8 @@ def try_load_students
     if File.exists?("students.csv")
       filename = "students.csv"
       puts "File not specified, or not found. Using existing students.csv instead."
-	else
-	  return
+    else
+      return
     end
   elsif !File.exists?(filename) 
     # filename given but not valid
