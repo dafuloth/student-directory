@@ -28,6 +28,7 @@ def process(selection)
     puts "Loading from file."
     load_students(get_filename)
   when "9"
+    puts "Program will exit. See you soon!"
     exit # this will cause the program to terminate
   else
     puts "I don't know what you meant, try again"
@@ -235,7 +236,22 @@ def save_students(filename = "students.csv")
   puts "Wrote data of #{@students.count} students to #{filename}."
 end
 
+
 def load_students(filename = "students.csv")
+
+  if !@students.empty?
+
+    puts "WARNING: Data of #{@students.count} already loaded. It will be lost if you proceed."
+
+    puts "Enter Y to continue, or anything else to return to menu."
+
+    if (STDIN.gets.chomp.upcase == "Y")
+      @students = []
+    else
+      interactive_menu
+    end
+
+  end
 
   if File.exists?(filename)
 #    file = File.open(filename, "r")
@@ -257,6 +273,7 @@ def load_students(filename = "students.csv")
     puts "The file #{filename} was not found. No data loaded."
   end
 end
+
 
 def add_student(name, cohort, bio, nemesis)
   @students << {name: name, cohort: cohort.to_sym, bio: bio, nemesis: nemesis}
